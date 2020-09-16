@@ -21,8 +21,9 @@ var errNotFoundInColumn = errors.New("not found in column")
 var errNotFoundInRow = errors.New("not found in row")
 
 func isExistInMatrix(in int, row int, column int) (bool, error) {
+	maxRow, maxColumn := len(matrix)-1, len(matrix[0])-1
 	for {
-		if (row < 0 || column < 0) || (row > 3 || column > 5) {
+		if (row < 0 || column < 0) || (row > maxRow || column > maxColumn) {
 			return false, errOutOfMatrixRange
 		}
 
@@ -33,15 +34,15 @@ func isExistInMatrix(in int, row int, column int) (bool, error) {
 			return true, nil
 		}
 		if in < ele {
-			column--
-			if column <= 0 {
+			if column <= 1 {
 				return false, errNotFoundInColumn
 			}
+			column--
 		} else {
-			row++
-			if row >= 4 {
+			if row >= maxRow {
 				return false, errNotFoundInRow
 			}
+			row++
 		}
 	}
 }
