@@ -46,19 +46,15 @@ func (bst *Bst) Add(value int) {
 	root := bst.root
 	find := new(treeListNode)
 	for root != nil {
+		find = root
 		if root.right == nil || root.left == nil {
-			find = root
 			root = nil
 			continue
 		}
-
 		if value > root.value {
-			find = root.right
-			root = find.right
-
+			root = root.right
 		} else {
-			find = root.left
-			root = find.left
+			root = root.left
 		}
 	}
 
@@ -97,14 +93,6 @@ value:12
 value:11
 value:14
 
-
-函数调用stack的过程
-
-
-
-
-preOrderTree（4）
-preOrderTree（10）
 */
 
 
@@ -114,11 +102,29 @@ func (bst *Bst) preOrderTree(node *treeListNode) {
 	if node == nil {
 		return
 	}
-	if node.parent ==  nil {
-		fmt.Printf("root value:%v\n" , node.value)
-	}else{
-		fmt.Printf("value:%v\n",node.value)
-	}
+	fmt.Printf("pre order value:%v\n",node.value)
 	bst.preOrderTree(node.left)
 	bst.preOrderTree(node.right)
 }
+
+
+func (bst *Bst) inOrderTree(node *treeListNode) {
+	if node  == nil {
+		return
+	}
+
+	bst.inOrderTree(node.left)
+	fmt.Printf("in order tree, input value:[%d]\n",node.value)
+	bst.inOrderTree(node.right)
+}
+
+
+func (bst *Bst) postOrderTree(node *treeListNode) {
+	if node  == nil {
+		return
+	}
+	bst.postOrderTree(node.left)
+	bst.postOrderTree(node.right)
+	fmt.Printf("after order tree, input value:[%d]\n",node.value)
+}
+

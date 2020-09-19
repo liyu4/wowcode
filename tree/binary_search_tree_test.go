@@ -13,8 +13,15 @@ func TestBstAdd(t  *testing.T) {
 	}
 }
 
-// Run table
 func TestPreOrder(t *testing.T) {
 	bst.preOrderTree(bst.root)
+}
+
+func TestInOrder(t *testing.T) {
+	bst.inOrderTree(bst.root)
+}
+
+func TestPostOrder(t *testing.T) {
+	bst.postOrderTree(bst.root)
 }
 
